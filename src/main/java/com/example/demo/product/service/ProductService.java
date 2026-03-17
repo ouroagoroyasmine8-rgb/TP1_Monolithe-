@@ -36,4 +36,13 @@ public class ProductService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+    // Modifier un produit existant
+    public Product update(Long id, Product details) {
+        Product product = getById(id);
+        product.setName(details.getName());
+        product.setDescription(details.getDescription());
+        product.setPrice(details.getPrice());
+        product.setStock(details.getStock());
+        return repository.save(product);
+    }
 }

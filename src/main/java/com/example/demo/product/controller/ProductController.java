@@ -41,4 +41,9 @@ public class ProductController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+    // PUT http://localhost:8080/api/products/{id}
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> update(@PathVariable Long id, @Valid @RequestBody Product product) {
+        return ResponseEntity.ok(service.update(id, product));
+    }
 }
