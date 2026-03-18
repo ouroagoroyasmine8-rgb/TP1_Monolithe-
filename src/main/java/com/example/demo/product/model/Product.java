@@ -1,4 +1,3 @@
-
 package com.example.demo.product.model;
 
 import jakarta.persistence.*;
@@ -8,7 +7,11 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Product {
 
     @Id

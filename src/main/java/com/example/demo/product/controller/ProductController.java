@@ -16,34 +16,30 @@ public class ProductController {
 
     private final ProductService service;
 
-    // GET http://localhost:8080/api/products
     @GetMapping
-    public List<Product> getAll() {
-        return service.getAll();
+    public ResponseEntity<List<Product>> getAll() {
+        return ResponseEntity.ok(service.getAll());
     }
 
-    // GET http://localhost:8080/api/products/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Product> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
-    // POST http://localhost:8080/api/products
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Product create(@Valid @RequestBody Product product) {
-        return service.save(product);
+    public ResponseEntity<Product> create(@Valid @RequestBody Product product) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(product));
     }
 
-    // DELETE http://localhost:8080/api/products/{id}
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
-    }
-    // PUT http://localhost:8080/api/products/{id}
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id, @Valid @RequestBody Product product) {
+    public ResponseEntity<Product> update(@PathVariable Long id,
+                                          @Valid @RequestBody Product product) {
         return ResponseEntity.ok(service.update(id, product));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
